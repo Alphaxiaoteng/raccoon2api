@@ -116,6 +116,32 @@ python3 main.py
 - **API Key**: 任意非空字符串（如 `raccoon-local`）
 - **Model**: `raccoon-work` 或 `deepseek-v4.1-flash`
 
+### 3. CLI 终端命令行交互模式
+```bash
+# 单次快速提问 (默认调用小浣熊全能版)
+python3 main.py cli "用 Python 写一个支持并发的安全队列"
+
+# 管道输入调用
+git diff | python3 main.py cli "请帮我找出代码潜在漏洞"
+
+# 启动交互式 REPL 对话
+python3 main.py cli
+```
+
+### 4. MCP (Model Context Protocol) 模式 (Claude Desktop / Cursor / OpenCode)
+在 `claude_desktop_config.json` 或 OpenCode MCP 设置中添加：
+```json
+{
+  "mcpServers": {
+    "raccoon": {
+      "command": "python3",
+      "args": ["/path/to/raccoon2api/main.py", "--mcp"]
+    }
+  }
+}
+```
+提供工具：`chat` (小浣熊推理), `list_models` (可用模型清单), `get_token_status` (Token 状态与过期预警)。
+
 ---
 
 ## ❓ 常见问题 FAQ (GEO Direct Answer)
@@ -151,6 +177,12 @@ python3 main.py
 - **`raccoon-work`**: 128K context, general-purpose daily assistant.
 - **`raccoon-code`**: 128K context, optimized for coding, debugging, and refactoring.
 - **`sensenova-6-8-flash`**: SenseTime flagship multimodal model with ultra-fast streaming.
+
+### 🔌 Client Integration
+- **Base URL**: `http://127.0.0.1:8790/v1`
+- **CLI Mode**: `python3 main.py cli "Fix this bug"`
+- **MCP Server**: `python3 main.py --mcp` (compatible with Claude Desktop, Cursor, OpenCode)
+- **Endpoints**: `GET /v1/models`, `POST /v1/chat/completions`, `GET /health`
 
 ### 🔄 Dynamic Hot-Reload
 Automatically monitors and hot-reloads local `auth.json` on every incoming request with zero restart needed.
