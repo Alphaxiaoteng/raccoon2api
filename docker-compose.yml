@@ -1,0 +1,14 @@
+services:
+  raccoon2api:
+    build: .
+    container_name: raccoon2api
+    restart: unless-stopped
+    ports:
+      - "8790:8790"
+    environment:
+      - PORT=8790
+      - RACCOON_ACCESS_TOKEN=${RACCOON_ACCESS_TOKEN:-}
+      - RACCOON_UPSTREAM_URL=https://xiaohuanxiong.com
+    env_file:
+      - path: .env
+        required: false

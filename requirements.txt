@@ -1,0 +1,7 @@
+# 商汤小浣熊 Raccoon2api 核心基于 Python 3 标准库，零外部依赖即可运行！
+# 本文件列出推荐的可选增强包：
+# pip install -r requirements.txt
+
+python-dotenv>=1.0.0
+requests>=2.31.0
+pytest>=8.0.0
